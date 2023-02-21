@@ -5,14 +5,14 @@ export default function RouteDetails() {
   return (
     <>
       <Head>
-        <title>Route planner</title>
-        <meta name="description" content="Find " />
+        <title>Your route</title>
+        <meta name="description" content="Check out your route" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <p>route details</p>
-        <Link href="/"></Link>
+        <Link href="/">Back to main page</Link>
+        <h1>Route details</h1>
       </main>
     </>
   );
