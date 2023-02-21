@@ -1,22 +1,17 @@
 import Head from 'next/head';
-import Image from 'next/image';
-import { Inter } from '@next/font/google';
-import styles from '@/styles/Home.module.css';
-import Link from 'next/link';
-
-const inter = Inter({ subsets: ['latin'] });
+import { RouteForm } from '@/Components/Molecules/RouteForm/RouteForm';
 
 export default function Home() {
   return (
     <>
       <Head>
         <title>Route planner</title>
-        <meta name="description" content="Find " />
+        <meta name="description" content="Find route between points and calculate price" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <Link href={'/route'}>Route details</Link>
+      <main>
+        <RouteForm />
       </main>
     </>
   );
