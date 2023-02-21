@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
-import Link from 'next/link';
+import { Input } from '@/Components/Atoms/Input/Input';
+import { RouteForm } from '@/Components/Molecules/RouteForm/RouteForm';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,7 +16,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Link href={'/route'}>Route details</Link>
+        <RouteForm>
+          <Input placeholderText="Choose a starting point" name="fromAdress" />
+          <Input placeholderText="Choose a destination point" name="toAdress" />
+          <button type="submit">Find route</button>
+        </RouteForm>
       </main>
     </>
   );
