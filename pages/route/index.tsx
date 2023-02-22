@@ -1,4 +1,4 @@
-import { RouteDetailsSection } from '@/Modules/Route-page/RouteDetailsSection/RouteDetailsSection';
+import { RouteDetailsSection } from '@/Components/Organisms/RouteDetailsSection/RouteDetailsSection';
 import Head from 'next/head';
 
 export default function RouteDetails() {
