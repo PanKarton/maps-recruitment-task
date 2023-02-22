@@ -1,7 +1,11 @@
 import Head from 'next/head';
 import { RouteForm } from '@/Components/Molecules/RouteForm/RouteForm';
+import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
 
 export default function Home() {
+  const data = useRoutePlanner();
+  console.log('index', data);
+
   return (
     <>
       <Head>

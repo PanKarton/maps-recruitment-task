@@ -1,7 +1,12 @@
+import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
 import Head from 'next/head';
 import Link from 'next/link';
 
 export default function RouteDetails() {
+  const data = useRoutePlanner();
+
+  console.log('route', data);
+
   return (
     <>
       <Head>
