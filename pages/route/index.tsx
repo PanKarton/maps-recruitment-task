@@ -1,5 +1,5 @@
+import { RouteDetailsSection } from '@/Modules/Route-page/RouteDetailsSection/RouteDetailsSection';
 import Head from 'next/head';
-import Link from 'next/link';
 
 export default function RouteDetails() {
   return (
@@ -11,8 +11,7 @@ export default function RouteDetails() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Link href="/">Back to main page</Link>
-        <h1>Route details</h1>
+        <RouteDetailsSection />
       </main>
     </>
   );
