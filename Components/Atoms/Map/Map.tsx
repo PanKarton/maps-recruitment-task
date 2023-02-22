@@ -14,14 +14,14 @@ const center = {
 };
 
 export const Map = () => {
-  const { isLoaded, directionData } = useRoutePlanner();
+  const { isLoaded, routeData } = useRoutePlanner();
 
-  if (!isLoaded || directionData === null) return <p>Loading...</p>;
+  if (!isLoaded || routeData === null) return <p>Loading...</p>;
 
   return (
     <StyledWrapper>
       <GoogleMap center={center} zoom={7} mapContainerStyle={{ width: '100%', height: '100%' }}>
-        {directionData && <DirectionsRenderer directions={directionData} />}
+        {routeData && <DirectionsRenderer directions={routeData} />}
       </GoogleMap>
     </StyledWrapper>
   );

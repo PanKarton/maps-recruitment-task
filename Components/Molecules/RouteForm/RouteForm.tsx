@@ -1,10 +1,10 @@
-import { StyledForm, StyledSubmit } from './RouteForm.styles';
-import { ReverseAdressesButton } from '@/Components/Atoms/ReverseAdressesButton/ReverseAdressesButton';
+import { StyledForm } from './RouteForm.styles';
+import { RoundButton } from '@/Components/Atoms/RoundButton/RoundButton.styles';
 import { StyledInput } from '../../Atoms/Input/Input';
 import { Autocomplete } from '@react-google-maps/api';
 import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
 import { useForm } from 'react-hook-form';
-import { TbArrowBigRightLines } from 'react-icons/tb';
+import { TbArrowBigRightLines, TbArrowsRightLeft } from 'react-icons/tb';
 
 type FormValues = {
   origin_adress: string;
@@ -37,7 +37,9 @@ export const RouteForm = () => {
               onChange={() => clearErrors(['origin_adress'])}
             />
           </Autocomplete>
-          <ReverseAdressesButton />
+          <RoundButton>
+            <TbArrowsRightLeft />
+          </RoundButton>
           <Autocomplete>
             <StyledInput
               {...register('destination_adress', {
@@ -50,9 +52,9 @@ export const RouteForm = () => {
           </Autocomplete>
         </div>
         <div className="buttons-wrapper">
-          <StyledSubmit type="submit">
+          <RoundButton type="submit">
             {isSubmitting ? 'Loading' : <TbArrowBigRightLines />}
-          </StyledSubmit>
+          </RoundButton>
         </div>
       </StyledForm>
       {/* {errorMessage && <p>{errorMessage}</p>} */}

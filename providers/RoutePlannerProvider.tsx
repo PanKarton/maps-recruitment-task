@@ -3,18 +3,20 @@ import { useJsApiLoader } from '@react-google-maps/api';
 import { getEnvVariable } from '@/helpers/getEnvVariable';
 import { SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import { useRoutesHistory } from './RoutesHistoryProvider';
 
 type Props = {
   children: ReactNode;
 };
 
 type Context = {
-  directionData: google.maps.DirectionsResult | null;
+  routeData: google.maps.DirectionsResult | null;
   distance: string | undefined;
   duration: string | undefined;
   isLoaded: boolean;
   onSubmit: SubmitHandler<FormValues>;
   clearRoute: () => void;
+  handleUpdateCurrentRoute: (route: google.maps.DirectionsResult) => void;
 };
 
 type FormValues = {
@@ -29,9 +31,11 @@ const libraries: ('drawing' | 'geometry' | 'localContext' | 'places' | 'visualiz
 ];
 
 export const RoutePlannerProvider = ({ children }: Props) => {
-  const [directionData, setDirectionData] = useState<google.maps.DirectionsResult | null>(null);
+  const [routeData, setRouteData] = useState<google.maps.DirectionsResult | null>(null);
   const [price, setPrice] = useState(0);
   const router = useRouter();
+
+  const { addRouteToHistory } = useRoutesHistory();
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: getEnvVariable(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY),
@@ -53,29 +57,36 @@ export const RoutePlannerProvider = ({ children }: Props) => {
 
         if (!distance || !duration) throw Error();
 
-        setDirectionData(response);
+        setRouteData(response);
 
         router.push('/route');
+
+        addRouteToHistory(response);
       } catch (error) {
         console.log('RoutePlannerProvider onSubmit', { error });
       }
     },
-    [router]
+    [router, addRouteToHistory]
   );
 
   const clearRoute = useCallback(() => {
-    setDirectionData(null);
+    setRouteData(null);
+  }, []);
+
+  const handleUpdateCurrentRoute = useCallback((route: google.maps.DirectionsResult) => {
+    setRouteData(route);
   }, []);
 
   const context = {
-    directionData,
-    distance: directionData?.routes[0].legs[0].distance?.text,
-    duration: directionData?.routes[0].legs[0].duration?.text,
+    routeData,
+    distance: routeData?.routes[0].legs[0].distance?.text,
+    duration: routeData?.routes[0].legs[0].duration?.text,
     isLoaded,
     price,
     onSubmit,
     clearRoute,
     setPrice,
+    handleUpdateCurrentRoute,
   };
 
   return <RoutePlannerContext.Provider value={context}>{children}</RoutePlannerContext.Provider>;

@@ -1,9 +1,9 @@
 export const theme = {
   color: {
     primary: '#fff',
-    primaryDarkHover: '#eee',
+    primaryDarker: '#eee',
     contrast: '#222',
-    contrastLightHover: '#555',
+    contrastLighter: '#555',
     contrastBorder: '#777',
     error: 'red',
   },
