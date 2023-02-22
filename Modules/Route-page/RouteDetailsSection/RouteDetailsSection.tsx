@@ -1,69 +1,37 @@
-import styled from 'styled-components';
-import { ReactNode } from 'react';
 import { Map } from '@/Components/Atoms/Map/Map';
 import Link from 'next/link';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
-
-export const StyledSection = styled.section`
-  display: flex;
-  justify-content: flex-end;
-  font-family: ${({ theme }) => theme.fontFamily.primary};
-
-  .route-details-wrapper {
-    flex-basis: 20rem;
-    display: flex;
-    flex-direction: column;
-    border-right: 1px solid ${({ theme }) => theme.color.contrastBorder};
-
-    a {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 1rem 0.5rem;
-      text-decoration: none;
-      font-weight: 500;
-      color: ${({ theme }) => theme.color.contrast};
-      border-bottom: 1px solid ${({ theme }) => theme.color.contrastBorder};
-      font-size: 1.25rem;
-      svg {
-        font-size: 1.5rem;
-      }
-      &:hover {
-        background-color: ${({ theme }) => theme.color.primaryDarkHover};
-      }
-    }
-
-    .route-details-list-wrapper {
-      padding: 0.5rem;
-
-      h1 {
-        font-weight: 600;
-        color: ${({ theme }) => theme.color.contrast};
-        font-size: 1.5rem;
-      }
-    }
-  }
-
-  .map-wrapper {
-    height: 100vh;
-    flex-grow: 1;
-  }
-`;
+import { StyledSection } from './RouteDetailsSection.styles';
+import { StyledInput } from '@/Components/Atoms/Input/Input';
+import { RouteStepsList } from '@/Components/Molecules/RouteStepsList/RouteStepsList';
 
 export const RouteDetailsSection = () => {
-  const { clearRoute } = useRoutePlanner();
+  const { clearRoute, distance, duration } = useRoutePlanner();
 
   return (
     <StyledSection>
-      <div className="route-details-wrapper">
+      <div className="route-wrapper">
         <Link href="/" onClick={clearRoute}>
           <AiOutlineArrowLeft />
           Plan another route
         </Link>
-        <div className="route-details-list-wrapper">
+        <div className="route-details-wrapper">
           <h1>Route details:</h1>
+          <p>
+            Distance: <strong>{distance}</strong>
+          </p>
+          <p>
+            Duration: <strong>{duration}</strong>
+          </p>
+          <p>Summary price: ${}</p>
+          <StyledInput
+            type="number"
+            placeholder="Price in EUR per 1km"
+            onKeyDown={e => ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault()}
+          />
         </div>
+        <RouteStepsList />
       </div>
       <div className="map-wrapper">
         <Map />

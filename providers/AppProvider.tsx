@@ -10,7 +10,7 @@ type Props = {
 export const AppProvider = ({ children }: Props) => {
   return (
     <RoutePlannerProvider>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </RoutePlannerProvider>
   );
 };

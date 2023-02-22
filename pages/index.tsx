@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { RouteForm } from '@/Components/Molecules/RouteForm/RouteForm';
 
-
 export default function Home() {
   return (
     <>

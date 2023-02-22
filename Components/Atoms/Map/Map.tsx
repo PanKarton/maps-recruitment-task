@@ -16,8 +16,6 @@ const center = {
 export const Map = () => {
   const { isLoaded, directionData } = useRoutePlanner();
 
-  console.log('map', directionData);
-
   if (!isLoaded || directionData === null) return <p>Loading...</p>;
 
   return (
