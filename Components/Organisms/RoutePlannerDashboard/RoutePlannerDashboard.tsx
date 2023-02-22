@@ -9,16 +9,32 @@ export const StyledSection = styled.section`
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) => theme.color.primary};
+
+  .flex-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+  }
+  .form-wrapper {
+    flex-basis: 5rem;
+  }
+  .history-wrapper {
+    width: 100%;
+    flex-grow: 1;
+  }
 `;
 
 export const RoutePlannerDashboard = () => {
   return (
     <StyledSection>
       <Paper>
-        <div className="form-wrapper">
-          <RouteForm />
+        <div className="flex-wrapper">
+          <div className="form-wrapper">
+            <RouteForm />
+          </div>
+          <div className="history-wrapper"></div>
         </div>
-        <div className="history-wrapper"></div>
       </Paper>
     </StyledSection>
   );

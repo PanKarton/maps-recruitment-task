@@ -1,10 +1,10 @@
-import { StyledForm } from './RouteForm.styles';
-import { Button } from '@/Components/Atoms/Button/Button';
+import { StyledForm, StyledSubmit } from './RouteForm.styles';
 import { ReverseAdressesButton } from '@/Components/Atoms/ReverseAdressesButton/ReverseAdressesButton';
 import { StyledInput } from '../../Atoms/Input/Input';
 import { Autocomplete } from '@react-google-maps/api';
 import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
 import { useForm } from 'react-hook-form';
+import { TbArrowBigRightLines } from 'react-icons/tb';
 
 type FormValues = {
   origin_adress: string;
@@ -26,29 +26,33 @@ export const RouteForm = () => {
   return (
     <>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <Autocomplete>
-          <StyledInput
-            {...register('origin_adress', {
-              required: 'Field is required.',
-            })}
-            placeholder="Origin"
-            className={errors.origin_adress ? 'invalid' : ''}
-            onChange={() => clearErrors(['origin_adress'])}
-          />
-        </Autocomplete>
-        <Autocomplete>
-          <StyledInput
-            {...register('destination_adress', {
-              required: 'Field is required.',
-            })}
-            placeholder="Destination"
-            className={errors.destination_adress ? 'invalid' : ''}
-            onChange={() => clearErrors(['destination_adress'])}
-          />
-        </Autocomplete>
-        <div className="buttons-wrapper">
-          <Button type="submit">{isSubmitting ? 'Loading' : 'Find route'}</Button>
+        <div className="inputs-wrapper">
+          <Autocomplete>
+            <StyledInput
+              {...register('origin_adress', {
+                required: 'Field is required.',
+              })}
+              placeholder="Origin"
+              className={errors.origin_adress ? 'invalid' : ''}
+              onChange={() => clearErrors(['origin_adress'])}
+            />
+          </Autocomplete>
           <ReverseAdressesButton />
+          <Autocomplete>
+            <StyledInput
+              {...register('destination_adress', {
+                required: 'Field is required.',
+              })}
+              placeholder="Destination"
+              className={errors.destination_adress ? 'invalid' : ''}
+              onChange={() => clearErrors(['destination_adress'])}
+            />
+          </Autocomplete>
+        </div>
+        <div className="buttons-wrapper">
+          <StyledSubmit type="submit">
+            {isSubmitting ? 'Loading' : <TbArrowBigRightLines />}
+          </StyledSubmit>
         </div>
       </StyledForm>
       {/* {errorMessage && <p>{errorMessage}</p>} */}
