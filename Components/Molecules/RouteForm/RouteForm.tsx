@@ -1,16 +1,25 @@
 import { StyledForm } from './RouteForm.styles';
 import { Button } from '@/Components/Atoms/Button/Button';
 import { ReverseAdressesButton } from '@/Components/Atoms/ReverseAdressesButton/ReverseAdressesButton';
-import { useRouteForm } from './useRouteForm';
 import { StyledInput } from '../../Atoms/Input/Input';
 import { Autocomplete } from '@react-google-maps/api';
 import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
+import { useForm } from 'react-hook-form';
+
+type FormValues = {
+  origin_adress: string;
+  destination_adress: string;
+};
 
 export const RouteForm = () => {
-  const { onSubmit, handleSubmit, register, clearErrors, errorMessage, isSubmitting, errors } =
-    useRouteForm();
+  const {
+    handleSubmit,
+    register,
+    clearErrors,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>();
 
-  const { isLoaded } = useRoutePlanner();
+  const { isLoaded, onSubmit } = useRoutePlanner();
 
   if (!isLoaded) return <p>Loading...</p>;
 
@@ -42,7 +51,7 @@ export const RouteForm = () => {
           <ReverseAdressesButton />
         </div>
       </StyledForm>
-      {errorMessage && <p>{errorMessage}</p>}
+      {/* {errorMessage && <p>{errorMessage}</p>} */}
     </>
   );
 };

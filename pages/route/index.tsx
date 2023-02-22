@@ -1,12 +1,7 @@
-import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
+import { RouteDetailsSection } from '@/Modules/Route-page/RouteDetailsSection/RouteDetailsSection';
 import Head from 'next/head';
-import Link from 'next/link';
 
 export default function RouteDetails() {
-  const data = useRoutePlanner();
-
-  console.log('route', data);
-
   return (
     <>
       <Head>
@@ -16,8 +11,7 @@ export default function RouteDetails() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Link href="/">Back to main page</Link>
-        <h1>Route details</h1>
+        <RouteDetailsSection />
       </main>
     </>
   );
