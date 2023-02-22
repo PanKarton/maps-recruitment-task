@@ -10,8 +10,8 @@ type Props = {
 
 type Context = {
   directionData: google.maps.DirectionsResult | null;
-  distance: google.maps.Distance | null;
-  duration: google.maps.Duration | null;
+  distance: string | undefined;
+  duration: string | undefined;
   isLoaded: boolean;
   onSubmit: SubmitHandler<FormValues>;
   clearRoute: () => void;
@@ -30,13 +30,13 @@ const libraries: ('drawing' | 'geometry' | 'localContext' | 'places' | 'visualiz
 
 export const RoutePlannerProvider = ({ children }: Props) => {
   const [directionData, setDirectionData] = useState<google.maps.DirectionsResult | null>(null);
-  const [distance, setDistance] = useState<google.maps.Distance | null>(null);
-  const [duration, setDuration] = useState<google.maps.Duration | null>(null);
+  const [price, setPrice] = useState(0);
   const router = useRouter();
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: getEnvVariable(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY),
     libraries,
+    language: 'en',
   });
 
   const onSubmit: SubmitHandler<FormValues> = useCallback(
@@ -53,11 +53,7 @@ export const RoutePlannerProvider = ({ children }: Props) => {
 
         if (!distance || !duration) throw Error();
 
-        console.log(response);
-
         setDirectionData(response);
-        setDistance(distance);
-        setDuration(duration);
 
         router.push('/route');
       } catch (error) {
@@ -69,11 +65,18 @@ export const RoutePlannerProvider = ({ children }: Props) => {
 
   const clearRoute = useCallback(() => {
     setDirectionData(null);
-    setDistance(null);
-    setDuration(null);
   }, []);
 
-  const context = { directionData, distance, duration, isLoaded, onSubmit, clearRoute };
+  const context = {
+    directionData,
+    distance: directionData?.routes[0].legs[0].distance?.text,
+    duration: directionData?.routes[0].legs[0].duration?.text,
+    isLoaded,
+    price,
+    onSubmit,
+    clearRoute,
+    setPrice,
+  };
 
   return <RoutePlannerContext.Provider value={context}>{children}</RoutePlannerContext.Provider>;
 };

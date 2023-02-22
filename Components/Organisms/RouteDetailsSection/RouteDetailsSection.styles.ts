@@ -1,20 +1,16 @@
 import styled from 'styled-components';
-import { ReactNode } from 'react';
-import { Map } from '@/Components/Atoms/Map/Map';
-import Link from 'next/link';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
 
 export const StyledSection = styled.section`
   display: flex;
   justify-content: flex-end;
   font-family: ${({ theme }) => theme.fontFamily.primary};
-
-  .route-details-wrapper {
-    flex-basis: 20rem;
+  .route-wrapper {
+    position: relative;
+    flex-basis: 23rem;
     display: flex;
     flex-direction: column;
     border-right: 1px solid ${({ theme }) => theme.color.contrastBorder};
+    background-color: ${({ theme }) => theme.color.primary};
 
     a {
       display: flex;
@@ -34,40 +30,31 @@ export const StyledSection = styled.section`
       }
     }
 
-    .route-details-list-wrapper {
-      padding: 0.5rem;
-
+    .route-details-wrapper {
+      padding-block: 1rem 2rem;
+      padding-inline: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      border-bottom: 1px solid ${({ theme }) => theme.color.contrastBorder};
       h1 {
         font-weight: 600;
         color: ${({ theme }) => theme.color.contrast};
         font-size: 1.5rem;
+        line-height: 1.5rem;
+      }
+      p {
+        font-weight: 500;
+        font-size: 1.125rem;
+      }
+      input {
+        margin-top: 0.5rem;
       }
     }
   }
 
   .map-wrapper {
-    height: 100vh;
+    min-height: 100vh;
     flex-grow: 1;
   }
 `;
-
-export const RouteDetailsSection = () => {
-  const { clearRoute } = useRoutePlanner();
-
-  return (
-    <StyledSection>
-      <div className="route-details-wrapper">
-        <Link href="/" onClick={clearRoute}>
-          <AiOutlineArrowLeft />
-          Plan another route
-        </Link>
-        <div className="route-details-list-wrapper">
-          <h1>Route details:</h1>
-        </div>
-      </div>
-      <div className="map-wrapper">
-        <Map />
-      </div>
-    </StyledSection>
-  );
-};

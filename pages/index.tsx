@@ -1,6 +1,5 @@
+import { RoutePlannerDashboard } from '@/Components/Organisms/RoutePlannerDashboard/RoutePlannerDashboard';
 import Head from 'next/head';
-import { RouteForm } from '@/Components/Molecules/RouteForm/RouteForm';
-
 
 export default function Home() {
   return (
@@ -12,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <RouteForm />
+        <RoutePlannerDashboard />
       </main>
     </>
   );
