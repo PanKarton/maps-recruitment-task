@@ -4,7 +4,7 @@ export const theme = {
     primaryDarker: '#eee',
     contrast: '#222',
     contrastLighter: '#555',
-    contrastBorder: '#777',
+    contrastBorder: '#ccc',
     error: 'red',
     errorLighter: '#FF3333',
   },

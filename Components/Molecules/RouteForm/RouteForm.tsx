@@ -6,6 +6,7 @@ import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
 import { useForm } from 'react-hook-form';
 import { TbArrowBigRightLines, TbArrowsRightLeft } from 'react-icons/tb';
 import { LoadingSpinner } from '@/Components/Atoms/LoadingSpinner/LoadingSpinner';
+import { RotatingLines } from 'react-loader-spinner';
 
 type FormValues = {
   origin_adress: string;
@@ -49,7 +50,17 @@ export const RouteForm = () => {
         </div>
         <div className="buttons-wrapper">
           <RoundButton type="submit">
-            {isSubmitting ? 'Loading' : <TbArrowBigRightLines />}
+            {isSubmitting ? (
+              <RotatingLines
+                strokeColor="grey"
+                strokeWidth="5"
+                animationDuration="1"
+                width="24"
+                visible={true}
+              />
+            ) : (
+              <TbArrowBigRightLines />
+            )}
           </RoundButton>
         </div>
       </StyledForm>
