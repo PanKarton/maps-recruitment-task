@@ -14,6 +14,7 @@ type Context = {
   distance: string | undefined;
   duration: string | undefined;
   isLoaded: boolean;
+  error: string;
   onSubmit: SubmitHandler<FormValues>;
   clearRoute: () => void;
   handleUpdateCurrentRoute: (route: google.maps.DirectionsResult) => void;
@@ -33,6 +34,7 @@ const libraries: ('drawing' | 'geometry' | 'localContext' | 'places' | 'visualiz
 export const RoutePlannerProvider = ({ children }: Props) => {
   const [routeData, setRouteData] = useState<google.maps.DirectionsResult | null>(null);
   const [price, setPrice] = useState(0);
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const { addRouteToHistory } = useRoutesHistory();
@@ -62,8 +64,15 @@ export const RoutePlannerProvider = ({ children }: Props) => {
         router.push('/route');
 
         addRouteToHistory(response);
-      } catch (error) {
-        console.log('RoutePlannerProvider onSubmit', { error });
+      } catch (err) {
+        if (err instanceof Error) {
+          const prunedError = err.message.split(': ')[2];
+
+          setError(prunedError);
+          setTimeout(() => {
+            setError('');
+          }, 6000);
+        }
       }
     },
     [router, addRouteToHistory]
@@ -83,6 +92,7 @@ export const RoutePlannerProvider = ({ children }: Props) => {
     duration: routeData?.routes[0].legs[0].duration?.text,
     isLoaded,
     price,
+    error,
     onSubmit,
     clearRoute,
     setPrice,

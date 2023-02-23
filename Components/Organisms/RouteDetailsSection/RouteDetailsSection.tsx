@@ -24,7 +24,14 @@ export const RouteDetailsSection = () => {
           <p>
             Duration: <strong>{duration}</strong>
           </p>
-          <p>Summary price: ${}</p>
+          <div>
+            Summary price: $
+            {false ? (
+              '12'
+            ) : (
+              <p> Enter a cost per kilometer to approximate the total cost of your trip</p>
+            )}
+          </div>
           <StyledInput
             type="number"
             placeholder="Price in EUR per 1km"

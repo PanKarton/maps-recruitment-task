@@ -7,14 +7,13 @@ export const StyledList = styled.ul`
 `;
 export const EdgePoint = styled.li`
   position: relative;
-  font-size: 1.125rem;
-  line-height: 1.25rem;
-  font-weight: 500;
-  padding: 2rem 1rem;
-
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  padding: 2rem 1rem;
+  font-size: 1.125rem;
+  line-height: 1.25rem;
+  font-weight: 500;
 
   &.origin::after {
     content: '';

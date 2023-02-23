@@ -6,6 +6,7 @@ export const theme = {
     contrastLighter: '#555',
     contrastBorder: '#777',
     error: 'red',
+    errorLighter: '#FF3333',
   },
   fontFamily: {
     primary: `'Montserrat', sans-serif`,

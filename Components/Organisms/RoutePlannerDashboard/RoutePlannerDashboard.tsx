@@ -1,9 +1,13 @@
+import { ErrorMessage } from '@/Components/Atoms/ErrorMessage/ErrorMessage';
 import { Paper } from '@/Components/Atoms/Paper/Paper';
 import { RouteForm } from '@/Components/Molecules/RouteForm/RouteForm';
 import { RoutesHistoryList } from '@/Components/Molecules/RoutesHistoryList/RoutesHistoryList';
+import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
 import { StyledSection } from './RoutePlannerDashboard.styles';
 
 export const RoutePlannerDashboard = () => {
+  const { error } = useRoutePlanner();
+
   return (
     <StyledSection>
       <Paper>
@@ -16,6 +20,7 @@ export const RoutePlannerDashboard = () => {
           </div>
         </div>
       </Paper>
+      <ErrorMessage message={error} />
     </StyledSection>
   );
 };

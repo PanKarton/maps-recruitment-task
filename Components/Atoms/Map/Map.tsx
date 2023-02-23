@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { GoogleMap, DirectionsRenderer, Marker } from '@react-google-maps/api';
 import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
+import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 
 export const StyledWrapper = styled.div`
   position: relative;
@@ -16,7 +17,7 @@ const center = {
 export const Map = () => {
   const { isLoaded, routeData } = useRoutePlanner();
 
-  if (!isLoaded || routeData === null) return <p>Loading...</p>;
+  if (!isLoaded || routeData === null) return <LoadingSpinner />;
 
   return (
     <StyledWrapper>

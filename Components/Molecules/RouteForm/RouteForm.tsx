@@ -5,6 +5,7 @@ import { Autocomplete } from '@react-google-maps/api';
 import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
 import { useForm } from 'react-hook-form';
 import { TbArrowBigRightLines, TbArrowsRightLeft } from 'react-icons/tb';
+import { LoadingSpinner } from '@/Components/Atoms/LoadingSpinner/LoadingSpinner';
 
 type FormValues = {
   origin_adress: string;
@@ -21,7 +22,7 @@ export const RouteForm = () => {
 
   const { isLoaded, onSubmit } = useRoutePlanner();
 
-  if (!isLoaded) return <p>Loading...</p>;
+  if (!isLoaded) return <LoadingSpinner />;
 
   return (
     <>
@@ -57,7 +58,6 @@ export const RouteForm = () => {
           </RoundButton>
         </div>
       </StyledForm>
-      {/* {errorMessage && <p>{errorMessage}</p>} */}
     </>
   );
 };
