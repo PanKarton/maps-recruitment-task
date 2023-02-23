@@ -77,7 +77,7 @@ export const RoutePlannerProvider = ({ children }: Props) => {
         }
       }
     },
-    [router]
+    [router, addRouteToHistory]
   );
 
   const handleUpdateCurrentRoute = useCallback((route: google.maps.DirectionsResult) => {

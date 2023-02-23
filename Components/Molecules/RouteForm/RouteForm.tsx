@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { TbArrowBigRightLines, TbArrowsRightLeft } from 'react-icons/tb';
 import { LoadingSpinner } from '@/Components/Atoms/LoadingSpinner/LoadingSpinner';
 import { RotatingLines } from 'react-loader-spinner';
+import { useCallback } from 'react';
 
 type FormValues = {
   origin_adress: string;
@@ -17,10 +18,18 @@ export const RouteForm = () => {
   const {
     handleSubmit,
     register,
+    getValues,
+    setValue,
     formState: { isSubmitting },
   } = useForm<FormValues>();
 
   const { isLoaded, onSubmit } = useRoutePlanner();
+
+  const swapInputValues = useCallback(() => {
+    const { destination_adress, origin_adress } = getValues();
+    setValue('origin_adress', destination_adress);
+    setValue('destination_adress', origin_adress);
+  }, [getValues, setValue]);
 
   if (!isLoaded) return <LoadingSpinner />;
 
@@ -36,7 +45,7 @@ export const RouteForm = () => {
               placeholder="Origin"
             />
           </Autocomplete>
-          <RoundButton>
+          <RoundButton onClick={swapInputValues} type="button">
             <TbArrowsRightLeft />
           </RoundButton>
           <Autocomplete>
