@@ -16,8 +16,7 @@ export const RouteForm = () => {
   const {
     handleSubmit,
     register,
-    clearErrors,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<FormValues>();
 
   const { isLoaded, onSubmit } = useRoutePlanner();
@@ -34,8 +33,6 @@ export const RouteForm = () => {
                 required: 'Field is required.',
               })}
               placeholder="Origin"
-              className={errors.origin_adress ? 'invalid' : ''}
-              onChange={() => clearErrors(['origin_adress'])}
             />
           </Autocomplete>
           <RoundButton>
@@ -47,8 +44,6 @@ export const RouteForm = () => {
                 required: 'Field is required.',
               })}
               placeholder="Destination"
-              className={errors.destination_adress ? 'invalid' : ''}
-              onChange={() => clearErrors(['destination_adress'])}
             />
           </Autocomplete>
         </div>

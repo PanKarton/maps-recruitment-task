@@ -14,9 +14,8 @@ type Context = {
   distance: string | undefined;
   duration: string | undefined;
   isLoaded: boolean;
-  error: string;
+  errors: string[];
   onSubmit: SubmitHandler<FormValues>;
-  clearRoute: () => void;
   handleUpdateCurrentRoute: (route: google.maps.DirectionsResult) => void;
 };
 
@@ -34,9 +33,8 @@ const libraries: ('drawing' | 'geometry' | 'localContext' | 'places' | 'visualiz
 export const RoutePlannerProvider = ({ children }: Props) => {
   const [routeData, setRouteData] = useState<google.maps.DirectionsResult | null>(null);
   const [price, setPrice] = useState(0);
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState<string[]>([]);
   const router = useRouter();
-
   const { addRouteToHistory } = useRoutesHistory();
 
   const { isLoaded } = useJsApiLoader({
@@ -66,21 +64,21 @@ export const RoutePlannerProvider = ({ children }: Props) => {
         addRouteToHistory(response);
       } catch (err) {
         if (err instanceof Error) {
+          // Extract readable message from string
           const prunedError = err.message.split(': ')[2];
-
-          setError(prunedError);
+          setErrors(prevState => [prunedError, ...prevState]);
           setTimeout(() => {
-            setError('');
-          }, 6000);
+            // Remove first element after 6s
+            setErrors(prevState => {
+              const [_, ...array] = prevState;
+              return array;
+            });
+          }, 6001);
         }
       }
     },
-    [router, addRouteToHistory]
+    [router]
   );
-
-  const clearRoute = useCallback(() => {
-    setRouteData(null);
-  }, []);
 
   const handleUpdateCurrentRoute = useCallback((route: google.maps.DirectionsResult) => {
     setRouteData(route);
@@ -92,9 +90,8 @@ export const RoutePlannerProvider = ({ children }: Props) => {
     duration: routeData?.routes[0].legs[0].duration?.text,
     isLoaded,
     price,
-    error,
+    errors,
     onSubmit,
-    clearRoute,
     setPrice,
     handleUpdateCurrentRoute,
   };
