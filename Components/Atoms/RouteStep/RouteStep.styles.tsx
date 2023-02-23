@@ -20,6 +20,6 @@ export const Distance = styled.p`
   font-weight: 600;
   line-height: 1rem;
   background-color: white;
-  color: ${({ theme }) => theme.color.contrastBorder};
+  color: ${({ theme }) => theme.color.contrastLighter};
   padding-inline: 1rem 0.57rem;
 `;
