@@ -5,14 +5,12 @@ import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
 import { StyledSection } from './RouteDetailsSection.styles';
 import { StyledInput } from '@/Components/Atoms/Input/Input';
 import { RouteStepsList } from '@/Components/Molecules/RouteStepsList/RouteStepsList';
-
 export const RouteDetailsSection = () => {
-  const { clearRoute, distance, duration } = useRoutePlanner();
-
+  const { distance, duration } = useRoutePlanner();
   return (
     <StyledSection>
       <div className="route-wrapper">
-        <Link href="/" onClick={clearRoute}>
+        <Link href="/">
           <AiOutlineArrowLeft />
           Plan another route
         </Link>
@@ -24,7 +22,14 @@ export const RouteDetailsSection = () => {
           <p>
             Duration: <strong>{duration}</strong>
           </p>
-          <p>Summary price: ${}</p>
+          <div>
+            Summary price: $
+            {false ? (
+              '12'
+            ) : (
+              <p> Enter a cost per kilometer to approximate the total cost of your trip</p>
+            )}
+          </div>
           <StyledInput
             type="number"
             placeholder="Price in EUR per 1km"

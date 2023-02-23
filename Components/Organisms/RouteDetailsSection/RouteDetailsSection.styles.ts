@@ -26,7 +26,7 @@ export const StyledSection = styled.section`
         font-size: 1.5rem;
       }
       &:hover {
-        background-color: ${({ theme }) => theme.color.primaryDarkHover};
+        background-color: ${({ theme }) => theme.color.primaryDarker};
       }
     }
 

@@ -15,7 +15,7 @@ export const RoutesHistoryProvider = ({ children }: Props) => {
   const [routesHistory, setRoutesHistory] = useState<google.maps.DirectionsResult[]>([]);
 
   const addRouteToHistory = useCallback((route: google.maps.DirectionsResult) => {
-    setRoutesHistory(prevState => [...prevState, route]);
+    setRoutesHistory(prevState => [route, ...prevState]);
   }, []);
 
   const context = { routesHistory, addRouteToHistory };
