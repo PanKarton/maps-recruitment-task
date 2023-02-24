@@ -3,8 +3,8 @@ import { Map } from '@/Components/Atoms/Map/Map';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
 import {
-  DownloadPfdButton,
   ReturnButton,
+  RouteDetails,
   RouteDetail,
   RouteEdgePoint,
   StyledDivider,
@@ -14,28 +14,25 @@ import { StyledInput } from '@/Components/Atoms/Input/Input';
 import { RouteStepsList } from '@/Components/Molecules/RouteStepsList/RouteStepsList';
 import { GiPathDistance } from 'react-icons/gi';
 import { BiDollar } from 'react-icons/bi';
-import { useReactToPrint } from 'react-to-print';
+import { DownloadPdfButton } from '@/Components/Atoms/DownloadPdfButton/DownloadPdfButton';
 
 export const RouteDetailsSection = () => {
   const { distance, totalPrice, origin, destination, calculateTotalPrice } = useRoutePlanner();
-  const handlePrint = useReactToPrint({
-    content: () => printRef.current,
-  });
-  const printRef = useRef<HTMLElement | null>(null);
 
+  const printRef = useRef<HTMLDivElement | null>(null);
   const kilometerCostRef = useRef<HTMLInputElement>(null);
   const accomodationCostRef = useRef<HTMLInputElement>(null);
 
-  return (
-    <StyledSection ref={printRef}>
-      <div className="route-wrapper">
-        <RouteStepsList />
-        <ReturnButton href="/">
-          <AiOutlineArrowLeft />
-          Plan another route
-        </ReturnButton>
+  const fileTitle = `${origin} - to - ${destination}.pdf`;
 
-        <div className="route-details-wrapper">
+  return (
+    <StyledSection>
+      <div className="route-details-wrapper">
+        <RouteDetails>
+          <ReturnButton href="/">
+            <AiOutlineArrowLeft />
+            Plan another route
+          </ReturnButton>
           <div className="route-edge-points">
             <RouteEdgePoint>
               <span>{origin}</span>
@@ -45,17 +42,6 @@ export const RouteDetailsSection = () => {
               <span>{destination}</span>
             </RouteEdgePoint>
           </div>
-          <div className="price-and-distance">
-            <RouteDetail className="distance">
-              <GiPathDistance />
-              <span>{distance}</span>
-            </RouteDetail>
-            <RouteDetail>
-              <BiDollar />
-              <span>{totalPrice}</span>
-            </RouteDetail>
-          </div>
-
           <div className="inputs">
             <StyledInput
               type="number"
@@ -72,14 +58,27 @@ export const RouteDetailsSection = () => {
               ref={accomodationCostRef}
             />
           </div>
+        </RouteDetails>
+
+        <div className="map-wrapper">
+          <Map />
         </div>
+
+        <DownloadPdfButton printRef={printRef} fileTitle={fileTitle} />
       </div>
-      <div className="map-wrapper">
-        <Map />
+      <div ref={printRef} className="route-steps-wrapper">
+        <div className="price-and-distance">
+          <RouteDetail className="distance">
+            <GiPathDistance />
+            <span>{distance}</span>
+          </RouteDetail>
+          <RouteDetail>
+            <BiDollar />
+            <span>{totalPrice}</span>
+          </RouteDetail>
+        </div>
+        <RouteStepsList />
       </div>
-      <DownloadPfdButton type="button" onClick={handlePrint}>
-        Download PDF
-      </DownloadPfdButton>
     </StyledSection>
   );
 };

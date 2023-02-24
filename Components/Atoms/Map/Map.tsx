@@ -6,7 +6,6 @@ import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 export const StyledWrapper = styled.div`
   position: relative;
   height: 100%;
-  background-color: #ccc;
 `;
 
 const center = {
