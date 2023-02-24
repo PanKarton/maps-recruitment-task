@@ -9,7 +9,9 @@ type Props = {
 export const RouteStep = ({ instructions, distance }: Props) => {
   return (
     <StyledListItem>
-      <Instructions>{[parse(instructions || 'sd')]}</Instructions>
+      <Instructions>
+        {[parse(instructions || 'No instructions avaliable for this step.')]}
+      </Instructions>
       <Distance>{distance}</Distance>
     </StyledListItem>
   );

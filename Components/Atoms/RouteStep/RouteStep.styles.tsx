@@ -17,7 +17,7 @@ export const Distance = styled.p`
   bottom: -0.5rem;
   height: 1rem;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1rem;
   background-color: white;
   color: ${({ theme }) => theme.color.contrastLighter};

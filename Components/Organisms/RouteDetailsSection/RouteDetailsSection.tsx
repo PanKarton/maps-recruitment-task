@@ -8,41 +8,19 @@ import {
   RouteEdgePoint,
   StyledDivider,
   StyledSection,
+  DownloadButton,
 } from './RouteDetailsSection.styles';
 import { StyledInput } from '@/Components/Atoms/Input/Input';
 import { RouteStepsList } from '@/Components/Molecules/RouteStepsList/RouteStepsList';
 import { GiPathDistance } from 'react-icons/gi';
 import { BiDollar } from 'react-icons/bi';
-import { useReactToPrint } from 'react-to-print';
-import { jsPDF } from 'jspdf';
+import { usePrintPdf } from './usePrintPdf';
 
 export const RouteDetailsSection = () => {
   const { distance, totalPrice, origin, destination, calculateTotalPrice } = useRoutePlanner();
-  // ===================================
-
-  const printRef = useRef<HTMLDivElement | null>(null);
-
   const documentTitle = `${origin} - to - ${destination}.pdf`;
+  const { handlePrint, printRef } = usePrintPdf(documentTitle);
 
-  const handlePrint = useReactToPrint({
-    content: () => printRef.current,
-    documentTitle,
-    print: async (printIframe: HTMLIFrameElement) => {
-      const pdf = new jsPDF('p', 'pt', 'a4');
-
-      const document = printIframe.contentDocument;
-
-      const print = document?.getElementById('pdf');
-
-      if (!print) return;
-
-      pdf.html(print, {
-        callback: () => pdf.save(documentTitle),
-      });
-    },
-  });
-
-  // ===================================
   const kilometerCostRef = useRef<HTMLInputElement>(null);
   const accomodationCostRef = useRef<HTMLInputElement>(null);
 
@@ -63,7 +41,7 @@ export const RouteDetailsSection = () => {
               <span>{destination}</span>
             </RouteEdgePoint>
           </div>
-          <div className="price-and-distance">
+          <div id="details" className="price-and-distance">
             <RouteDetail className="distance">
               <GiPathDistance />
               <span>{distance}</span>
@@ -93,12 +71,12 @@ export const RouteDetailsSection = () => {
         </div>
         <div id="pdf" ref={printRef} className="steps-wrapper">
           <RouteStepsList />
+          <DownloadButton onClick={handlePrint}>Download PDF</DownloadButton>
         </div>
       </div>
       <div className="map-wrapper">
         <Map />
       </div>
-      <button onClick={handlePrint}>Download PDF</button>
     </StyledSection>
   );
 };

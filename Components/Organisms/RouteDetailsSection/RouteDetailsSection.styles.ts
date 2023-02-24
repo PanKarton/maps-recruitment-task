@@ -100,3 +100,20 @@ export const StyledDivider = styled(RxDotsVertical)`
   font-size: 1.5rem;
   color: ${({ theme }) => theme.color.contrast};
 `;
+
+export const DownloadButton = styled.button`
+  position: absolute;
+  bottom: 0;
+  right: -1rem;
+  translate: 100% 0;
+  z-index: 9999;
+  background-color: ${({ theme }) => theme.color.primary};
+  padding: 1rem 2rem;
+  border: none;
+  font-family: ${({ theme }) => theme.fontFamily.primary};
+  font-weight: 600;
+  &:hover {
+    cursor: pointer;
+    background-color: ${({ theme }) => theme.color.primaryDarker};
+  }
+`;

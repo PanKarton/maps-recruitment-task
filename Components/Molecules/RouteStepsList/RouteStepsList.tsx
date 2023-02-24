@@ -15,14 +15,14 @@ export const RouteStepsList = () => {
   return (
     <StyledList>
       <EdgePoint className="origin">
-        {/* <HiOutlineLocationMarker /> */}
+        <HiOutlineLocationMarker />
         {start_address}
       </EdgePoint>
       {steps.map(({ distance, instructions }, index) => (
         <RouteStep key={index} distance={distance?.text} instructions={instructions} />
       ))}
       <EdgePoint>
-        {/* <HiLocationMarker /> */}
+        <HiLocationMarker />
         {end_address}
       </EdgePoint>
     </StyledList>
