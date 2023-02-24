@@ -8,14 +8,18 @@ import {
   RouteEdgePoint,
   StyledDivider,
   StyledSection,
+  DownloadButton,
 } from './RouteDetailsSection.styles';
 import { StyledInput } from '@/Components/Atoms/Input/Input';
 import { RouteStepsList } from '@/Components/Molecules/RouteStepsList/RouteStepsList';
 import { GiPathDistance } from 'react-icons/gi';
 import { BiDollar } from 'react-icons/bi';
+import { usePrintPdf } from './usePrintPdf';
 
 export const RouteDetailsSection = () => {
   const { distance, totalPrice, origin, destination, calculateTotalPrice } = useRoutePlanner();
+  const documentTitle = `${origin} - to - ${destination}.pdf`;
+  const { handlePrint, printRef } = usePrintPdf(documentTitle);
 
   const kilometerCostRef = useRef<HTMLInputElement>(null);
   const accomodationCostRef = useRef<HTMLInputElement>(null);
@@ -37,7 +41,7 @@ export const RouteDetailsSection = () => {
               <span>{destination}</span>
             </RouteEdgePoint>
           </div>
-          <div className="price-and-distance">
+          <div id="details" className="price-and-distance">
             <RouteDetail className="distance">
               <GiPathDistance />
               <span>{distance}</span>
@@ -65,7 +69,10 @@ export const RouteDetailsSection = () => {
             />
           </div>
         </div>
-        <RouteStepsList />
+        <div id="pdf" ref={printRef} className="steps-wrapper">
+          <RouteStepsList />
+          <DownloadButton onClick={handlePrint}>Download PDF</DownloadButton>
+        </div>
       </div>
       <div className="map-wrapper">
         <Map />
