@@ -54,6 +54,11 @@ export const StyledSection = styled.section`
         margin-top: 0.5rem;
       }
     }
+    .steps-wrapper {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      height: 0px;
+    }
   }
 
   .map-wrapper {
