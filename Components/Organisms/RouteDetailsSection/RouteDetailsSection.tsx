@@ -1,9 +1,10 @@
 import { useRef } from 'react';
 import { Map } from '@/Components/Atoms/Map/Map';
-import Link from 'next/link';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
 import {
+  DownloadPfdButton,
+  ReturnButton,
   RouteDetail,
   RouteEdgePoint,
   StyledDivider,
@@ -20,13 +21,17 @@ export const RouteDetailsSection = () => {
   const kilometerCostRef = useRef<HTMLInputElement>(null);
   const accomodationCostRef = useRef<HTMLInputElement>(null);
 
+  const printRef = useRef<HTMLElement | null>(null);
+
   return (
-    <StyledSection>
+    <StyledSection ref={printRef}>
       <div className="route-wrapper">
-        <Link href="/">
+        <RouteStepsList />
+        <ReturnButton href="/">
           <AiOutlineArrowLeft />
           Plan another route
-        </Link>
+        </ReturnButton>
+
         <div className="route-details-wrapper">
           <div className="route-edge-points">
             <RouteEdgePoint>
@@ -65,11 +70,11 @@ export const RouteDetailsSection = () => {
             />
           </div>
         </div>
-        <RouteStepsList />
       </div>
       <div className="map-wrapper">
         <Map />
       </div>
+      <DownloadPfdButton type="button">Download PDF</DownloadPfdButton>
     </StyledSection>
   );
 };

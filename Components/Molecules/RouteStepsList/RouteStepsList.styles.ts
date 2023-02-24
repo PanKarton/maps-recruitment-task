@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledList = styled.ul`
-  flex: 1 1 auto;
-  overflow-y: auto;
-  height: 0px;
-`;
+export const StyledList = styled.ul``;
 export const EdgePoint = styled.li`
   position: relative;
   display: flex;
