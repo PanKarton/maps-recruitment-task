@@ -14,14 +14,17 @@ import { StyledInput } from '@/Components/Atoms/Input/Input';
 import { RouteStepsList } from '@/Components/Molecules/RouteStepsList/RouteStepsList';
 import { GiPathDistance } from 'react-icons/gi';
 import { BiDollar } from 'react-icons/bi';
+import { useReactToPrint } from 'react-to-print';
 
 export const RouteDetailsSection = () => {
   const { distance, totalPrice, origin, destination, calculateTotalPrice } = useRoutePlanner();
+  const handlePrint = useReactToPrint({
+    content: () => printRef.current,
+  });
+  const printRef = useRef<HTMLElement | null>(null);
 
   const kilometerCostRef = useRef<HTMLInputElement>(null);
   const accomodationCostRef = useRef<HTMLInputElement>(null);
-
-  const printRef = useRef<HTMLElement | null>(null);
 
   return (
     <StyledSection ref={printRef}>
@@ -74,7 +77,9 @@ export const RouteDetailsSection = () => {
       <div className="map-wrapper">
         <Map />
       </div>
-      <DownloadPfdButton type="button">Download PDF</DownloadPfdButton>
+      <DownloadPfdButton type="button" onClick={handlePrint}>
+        Download PDF
+      </DownloadPfdButton>
     </StyledSection>
   );
 };
