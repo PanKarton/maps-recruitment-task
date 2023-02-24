@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { GoogleMap, DirectionsRenderer, Marker } from '@react-google-maps/api';
+import { GoogleMap, DirectionsRenderer } from '@react-google-maps/api';
 import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
 import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 
