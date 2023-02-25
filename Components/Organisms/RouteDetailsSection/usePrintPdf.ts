@@ -49,7 +49,7 @@ export const usePrintPdf = (documentTitle: string) => {
       doc.addImage(stepsImgData, 'PNG', 0, detailsCanvas.height, imgWidth, stepsCanvas.height);
       heightLeft -= pageHeight;
 
-      let position = 40; // Move stepsImgData higher on 2nd and next pages
+      let position = 0;
 
       while (position >= -imgHeight) {
         // Generate new page and move image up for pageHeight value
