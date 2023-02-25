@@ -22,4 +22,5 @@ export const Distance = styled.p`
   background-color: white;
   color: ${({ theme }) => theme.color.contrastLighter};
   padding-inline: 1rem 0.57rem;
+  font-family: ${({ theme }) => theme.fontFamily.primary};
 `;
