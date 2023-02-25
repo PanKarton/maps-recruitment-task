@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { Map } from '@/Components/Atoms/Map/Map';
-import Link from 'next/link';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useRoutePlanner } from '@/providers/RoutePlannerProvider';
 import {
@@ -11,6 +10,7 @@ import {
   DownloadButton,
   RouteDetailsWrapper,
   RouteStepsListWrapper,
+  ReturnAnchor,
 } from './RouteDetailsSection.styles';
 import { StyledInput } from '@/Components/Atoms/Input/Input';
 import { RouteStepsList } from '@/Components/Molecules/RouteStepsList/RouteStepsList';
@@ -28,11 +28,11 @@ export const RouteDetailsSection = () => {
 
   return (
     <StyledSection>
+      <ReturnAnchor href="/">
+        <AiOutlineArrowLeft />
+        Plan another route
+      </ReturnAnchor>
       <div className="route-wrapper">
-        <Link href="/">
-          <AiOutlineArrowLeft />
-          Plan another route
-        </Link>
         <RouteDetailsWrapper id="details-print" ref={detailsRef}>
           <div className="route-edge-points">
             <RouteEdgePoint>
