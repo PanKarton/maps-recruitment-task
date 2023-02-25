@@ -38,25 +38,23 @@ export const usePrintPdf = (documentTitle: string) => {
       const detailsImgData = detailsCanvas.toDataURL('image/png');
       const stepsImgData = stepsCanvas.toDataURL('image/png');
 
-      // Set const and variables for algoritm
+      // Set constants for algoritm
       const imgWidth = detailsCanvas.width;
       const pageHeight = 832;
-      const imgHeight = detailsCanvas.height + stepsCanvas.height;
-      let heightLeft = imgHeight;
 
       // Add two images on first page
       doc.addImage(detailsImgData, 'PNG', 0, 0, imgWidth, detailsCanvas.height);
       doc.addImage(stepsImgData, 'PNG', 0, detailsCanvas.height, imgWidth, stepsCanvas.height);
-      heightLeft -= pageHeight;
 
-      let position = 0;
+      // Add second page with positon reduced by detailsCanvas.height
 
-      while (position >= -imgHeight) {
-        // Generate new page and move image up for pageHeight value
-        position += heightLeft - imgHeight; // move steps image top higher per page hight each loop step
+      let position = -pageHeight + detailsCanvas.height - 20;
+      while (position > -stepsCanvas.height) {
         doc.addPage();
         doc.addImage(stepsImgData, 'PNG', 0, position, imgWidth, stepsCanvas.height);
+        position = position - pageHeight;
       }
+
       doc.save(documentTitle);
     },
   });
