@@ -99,9 +99,9 @@ export const StyledDivider = styled(RxDotsVertical)`
 `;
 
 export const RouteStepsListWrapper = styled.div`
-    flex: 1 1 auto;
-    overflow-y: auto;
-    height: 0px;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  height: 0px;
 `;
 
 export const DownloadButton = styled.button`
@@ -109,7 +109,7 @@ export const DownloadButton = styled.button`
   bottom: 0;
   right: -1rem;
   translate: 100% 0;
-  z-index: 9999;
+  z-index: 1;
   background-color: ${({ theme }) => theme.color.primary};
   padding: 1rem 2rem;
   border: none;
