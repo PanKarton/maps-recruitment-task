@@ -14,9 +14,15 @@ export const RoutesHistoryList = () => {
 
   return (
     <StyledList>
-      {routesHistory.map((route, index) => {
-        return <RoutesHistoryListItem key={index} route={route} />;
-      })}
+      {routesHistory.map((route, index) => (
+        <RoutesHistoryListItem key={index} route={route} />
+      ))}
+      {routesHistory.map((route, index) => (
+        <RoutesHistoryListItem key={index} route={route} />
+      ))}
+      {routesHistory.map((route, index) => (
+        <RoutesHistoryListItem key={index} route={route} />
+      ))}
     </StyledList>
   );
 };

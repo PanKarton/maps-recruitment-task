@@ -8,12 +8,16 @@ export const StyledListItem = styled.li`
   }
 
   .flex-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1.5rem 1fr 5rem;
-
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    @media screen and (min-width: 40.625rem) {
+      display: grid;
+      grid-template-columns: 1fr 1.5rem 1fr 5rem;
+      gap: 2rem;
+    }
     .distance {
-      margin-left: auto;
+      text-align: center;
       font-size: 1.125rem;
       font-family: ${({ theme }) => theme.fontFamily.primary};
       color: ${({ theme }) => theme.color.contrast};
@@ -37,10 +41,13 @@ export const EdgePoint = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.5rem;
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-family: ${({ theme }) => theme.fontFamily.primary};
   color: ${({ theme }) => theme.color.contrast};
   font-weight: 500;
+  @media screen and (min-width: 56.25rem) {
+    font-size: 1.125rem;
+  }
   span {
     display: block;
     font-weight: 600;
@@ -49,9 +56,14 @@ export const EdgePoint = styled.div`
 
 export const ArrowIcon = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   svg {
     color: ${({ theme }) => theme.color.contrast};
     font-size: 1.5rem;
+    rotate: 90deg;
+    @media screen and (min-width: 40.625rem) {
+      rotate: 0deg;
+    }
   }
 `;

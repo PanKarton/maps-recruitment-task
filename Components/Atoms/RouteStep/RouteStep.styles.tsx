@@ -10,6 +10,7 @@ export const Instructions = styled.div`
   font-size: 1rem;
   line-height: 1.25rem;
   font-weight: 500;
+  max-width: 23rem;
 `;
 export const Distance = styled.p`
   position: absolute;

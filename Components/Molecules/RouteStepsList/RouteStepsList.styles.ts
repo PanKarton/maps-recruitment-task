@@ -4,6 +4,7 @@ export const StyledList = styled.ul`
   height: 100%;
   font-family: ${({ theme }) => theme.fontFamily.primary};
   max-width: 23rem;
+  list-style-type: none;
 `;
 export const EdgePoint = styled.li`
   position: relative;
