@@ -1,28 +1,28 @@
 import { useReactToPrint } from 'react-to-print';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 
 export const usePrintPdf = (documentTitle: string) => {
   const detailsRef = useRef<HTMLDivElement | null>(null);
   const stepsRef = useRef<HTMLUListElement | null>(null);
 
-  const handlePrint = useReactToPrint({
-    // Return content as iFrame to print function
-    content: () => {
-      const wrapper = document.createElement('div');
+  const getContent = useCallback(() => {
+    const wrapper = document.createElement('div');
 
-      const detailsElement = detailsRef.current?.cloneNode(true);
-      const stepsElement = stepsRef.current?.cloneNode(true);
+    const detailsElement = detailsRef.current?.cloneNode(true);
+    const stepsElement = stepsRef.current?.cloneNode(true);
 
-      if (!detailsElement || !stepsElement) return null;
+    if (!detailsElement || !stepsElement) return null;
 
-      wrapper.appendChild(detailsElement);
-      wrapper.appendChild(stepsElement);
+    wrapper.appendChild(detailsElement);
+    wrapper.appendChild(stepsElement);
 
-      return wrapper;
-    },
-    print: async (printIframe: HTMLIFrameElement) => {
+    return wrapper;
+  }, []);
+
+  const transformHtmlToPdf = useCallback(
+    async (printIframe: HTMLIFrameElement) => {
       const document = printIframe.contentDocument;
       const doc = new jsPDF('p', 'pt', 'a4');
 
@@ -57,6 +57,13 @@ export const usePrintPdf = (documentTitle: string) => {
 
       doc.save(documentTitle);
     },
+    [documentTitle]
+  );
+
+  const handlePrint = useReactToPrint({
+    // Return content as iFrame to print function
+    content: getContent,
+    print: transformHtmlToPdf,
   });
 
   return {
