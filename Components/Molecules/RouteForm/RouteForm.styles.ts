@@ -8,7 +8,7 @@ export const StyledForm = styled.form`
     justify-content: center;
     align-items: center;
     gap: 0.25rem;
-    @media screen and (min-width: 650px) {
+    @media screen and (min-width: 40.625rem) {
       flex-direction: row;
     }
     .swap-btn {
@@ -24,7 +24,7 @@ export const StyledForm = styled.form`
     @media screen and (min-width: 25rem) {
       right: 0rem;
     }
-    @media screen and (min-width: 650px) {
+    @media screen and (min-width: 40.625rem) {
       right: -0.75rem;
     }
   }
