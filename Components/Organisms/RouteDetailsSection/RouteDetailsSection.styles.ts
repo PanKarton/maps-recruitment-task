@@ -14,9 +14,11 @@ export const StyledSection = styled.section`
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-self: center;
     background-color: ${({ theme }) => theme.color.primary};
     max-width: 23rem;
+    border-inline: 1px solid ${({ theme }) => theme.color.contrastBorder};
+
     @media screen and (min-width: 50rem) {
       align-self: auto;
       border-right: 2px solid ${({ theme }) => theme.color.contrastBorder};
@@ -41,9 +43,9 @@ export const RouteDetailsWrapper = styled.div`
   gap: 1rem;
   font-family: ${({ theme }) => theme.fontFamily.primary};
   max-width: 23rem;
+  border-bottom: 1px solid ${({ theme }) => theme.color.contrastBorder};
   @media screen and (min-width: 50rem) {
-    padding-block: 1.5rem 0.5rem;
-    border-bottom: 1px solid ${({ theme }) => theme.color.contrastBorder};
+    padding-block: 1.5rem;
   }
   .route-edge-points {
     display: flex;
