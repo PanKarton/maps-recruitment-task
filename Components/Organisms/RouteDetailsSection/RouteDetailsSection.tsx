@@ -9,6 +9,8 @@ import {
   StyledDivider,
   StyledSection,
   DownloadButton,
+  RouteDetailsWrapper,
+  RouteStepsListWrapper,
 } from './RouteDetailsSection.styles';
 import { StyledInput } from '@/Components/Atoms/Input/Input';
 import { RouteStepsList } from '@/Components/Molecules/RouteStepsList/RouteStepsList';
@@ -19,7 +21,7 @@ import { usePrintPdf } from './usePrintPdf';
 export const RouteDetailsSection = () => {
   const { distance, totalPrice, origin, destination, calculateTotalPrice } = useRoutePlanner();
   const documentTitle = `${origin} - to - ${destination}.pdf`;
-  const { handlePrint, printRef } = usePrintPdf(documentTitle);
+  const { handlePrint, stepsRef, detailsRef } = usePrintPdf(documentTitle);
 
   const kilometerCostRef = useRef<HTMLInputElement>(null);
   const accomodationCostRef = useRef<HTMLInputElement>(null);
@@ -31,7 +33,7 @@ export const RouteDetailsSection = () => {
           <AiOutlineArrowLeft />
           Plan another route
         </Link>
-        <div className="route-details-wrapper">
+        <RouteDetailsWrapper id="details-print" ref={detailsRef}>
           <div className="route-edge-points">
             <RouteEdgePoint>
               <span>{origin}</span>
@@ -41,7 +43,7 @@ export const RouteDetailsSection = () => {
               <span>{destination}</span>
             </RouteEdgePoint>
           </div>
-          <div id="details" className="price-and-distance">
+          <div className="price-and-distance">
             <RouteDetail className="distance">
               <GiPathDistance />
               <span>{distance}</span>
@@ -68,11 +70,11 @@ export const RouteDetailsSection = () => {
               ref={accomodationCostRef}
             />
           </div>
-        </div>
-        <div id="pdf" ref={printRef} className="steps-wrapper">
-          <RouteStepsList />
+        </RouteDetailsWrapper>
+        <RouteStepsListWrapper>
+          <RouteStepsList id="steps-print" ref={stepsRef} />
           <DownloadButton onClick={handlePrint}>Download PDF</DownloadButton>
-        </div>
+        </RouteStepsListWrapper>
       </div>
       <div className="map-wrapper">
         <Map />

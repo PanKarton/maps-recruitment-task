@@ -3,8 +3,13 @@ import { RouteStep } from '@/Components/Atoms/RouteStep/RouteStep';
 import { HiOutlineLocationMarker, HiLocationMarker } from 'react-icons/hi';
 import { EdgePoint, StyledList } from './RouteStepsList.styles';
 import { LoadingSpinner } from '@/Components/Atoms/LoadingSpinner/LoadingSpinner';
+import { forwardRef } from 'react';
 
-export const RouteStepsList = () => {
+type Props = {
+  id: string;
+};
+
+const RouteStepsList = forwardRef<HTMLUListElement, Props>(({ id }, ref) => {
   const { routeData } = useRoutePlanner();
 
   const steps = routeData?.routes[0].legs[0].steps;
@@ -13,7 +18,7 @@ export const RouteStepsList = () => {
   if (!steps) return <LoadingSpinner />;
 
   return (
-    <StyledList>
+    <StyledList id={id} ref={ref}>
       <EdgePoint className="origin">
         <HiOutlineLocationMarker />
         {start_address}
@@ -27,4 +32,8 @@ export const RouteStepsList = () => {
       </EdgePoint>
     </StyledList>
   );
-};
+});
+
+RouteStepsList.displayName = 'RouteStepsList';
+
+export { RouteStepsList };

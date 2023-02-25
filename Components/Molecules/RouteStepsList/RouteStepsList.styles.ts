@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const StyledList = styled.ul`
   height: 100%;
+  font-family: ${({ theme }) => theme.fontFamily.primary};
+  max-width: 23rem;
 `;
 export const EdgePoint = styled.li`
   position: relative;

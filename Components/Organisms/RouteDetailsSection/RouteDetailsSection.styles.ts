@@ -30,40 +30,37 @@ export const StyledSection = styled.section`
         background-color: ${({ theme }) => theme.color.primaryDarker};
       }
     }
-
-    .route-details-wrapper {
-      padding-block: 1rem 2rem;
-      padding-inline: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      border-bottom: 2px solid ${({ theme }) => theme.color.contrastBorder};
-      .route-edge-points {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      .price-and-distance {
-        display: flex;
-      }
-
-      .inputs {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        margin-top: 0.5rem;
-      }
-    }
-    .steps-wrapper {
-      flex: 1 1 auto;
-      overflow-y: auto;
-      height: 0px;
-    }
   }
 
   .map-wrapper {
     min-height: 100vh;
     flex-grow: 1;
+  }
+`;
+
+export const RouteDetailsWrapper = styled.div`
+  padding-block: 1rem 2rem;
+  padding-inline: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-bottom: 2px solid ${({ theme }) => theme.color.contrastBorder};
+  font-family: ${({ theme }) => theme.fontFamily.primary};
+  max-width: 23rem;
+  .route-edge-points {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .price-and-distance {
+    display: flex;
+  }
+
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
   }
 `;
 
@@ -99,6 +96,12 @@ export const RouteEdgePoint = styled.div`
 export const StyledDivider = styled(RxDotsVertical)`
   font-size: 1.5rem;
   color: ${({ theme }) => theme.color.contrast};
+`;
+
+export const RouteStepsListWrapper = styled.div`
+    flex: 1 1 auto;
+    overflow-y: auto;
+    height: 0px;
 `;
 
 export const DownloadButton = styled.button`
