@@ -47,11 +47,13 @@ export const RouteDetailsWrapper = styled.div`
   border-bottom: 2px solid ${({ theme }) => theme.color.contrastBorder};
   font-family: ${({ theme }) => theme.fontFamily.primary};
   max-width: 23rem;
+
   .route-edge-points {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
   }
+
   .price-and-distance {
     display: flex;
   }
