@@ -4,16 +4,28 @@ export const StyledForm = styled.form`
   position: relative;
   .inputs-wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 0.75rem;
+    align-items: center;
+    gap: 0.25rem;
+    @media screen and (min-width: 650px) {
+      flex-direction: row;
+    }
+    .swap-btn {
+      rotate: 90deg;
+      height: 2.875rem;
+      width: 2.875rem;
+    }
   }
-
-  .buttons-wrapper {
+  .submit-btn {
     position: absolute;
-    right: -1rem;
-    top: 50%;
-    translate: 100% -50%;
-    display: flex;
-    justify-content: center;
+    right: 0.5rem;
+    translate: 100% 0;
+    @media screen and (min-width: 25rem) {
+      right: 0rem;
+    }
+    @media screen and (min-width: 650px) {
+      right: -0.75rem;
+    }
   }
 `;

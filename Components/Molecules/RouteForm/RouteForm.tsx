@@ -45,9 +45,10 @@ export const RouteForm = () => {
               placeholder="Origin"
             />
           </Autocomplete>
-          <RoundButton onClick={swapInputValues} type="button">
+          <RoundButton className="swap-btn" onClick={swapInputValues} type="button">
             <TbArrowsRightLeft />
           </RoundButton>
+
           <Autocomplete>
             <StyledInput
               {...register('destination_adress', {
@@ -56,9 +57,7 @@ export const RouteForm = () => {
               placeholder="Destination"
             />
           </Autocomplete>
-        </div>
-        <div className="buttons-wrapper">
-          <RoundButton type="submit">
+          <RoundButton className="submit-btn" type="submit">
             {isSubmitting ? (
               <RotatingLines
                 strokeColor="grey"
